@@ -75,7 +75,7 @@
        <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
      </div>
         </div>
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success" [disabled]="form.invalid">Save</button>
       </form>
       <pre>{{form.value | json}}</pre>
     </div>
