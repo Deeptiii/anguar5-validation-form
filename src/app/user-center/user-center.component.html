@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-sm-9">
+    <div *ngIf="!hideNewUser">
+      <h2>New User</h2>
+      
+      <form #form="ngForm" (ngSubmit)="onSubmitAddUser(form.value)" class="well">
+        
+        <div class="form-group" [ngClass]="{
+          'has-error': firstname.invalid && (firstname.dirty || firstname.touched),
+          'has-success': firstname.valid && (firstname.dirty || firstname.touched)
+     }">
+          <label for="">Firstname</label>
+          <input type="text" 
+          class="form-control" 
+          required 
+          maxlength="15"
+          name="firstname" 
+          [(ngModel)]="model.firstname"
+          #firstname="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="firstname.errors && (firstname.dirty || firstname.touched)">
+       <p *ngIf="firstname.errors.required">First name is required</p>
+     </div>
+        </div>
+        <div class="form-group" [ngClass]="{
+          'has-error': lastname.invalid && (lastname.dirty || lastname.touched),
+          'has-success': lastname.valid && (lastname.dirty || lastname.touched)
+     }">
+          <label for="">Lastname</label>
+          <input type="text" 
+          class="form-control" 
+          required 
+          maxlength="15"
+          name="lastname" 
+          [(ngModel)]="model.lastname"
+          #lastname="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="lastname.errors && (lastname.dirty || lastname.touched)">
+       <p *ngIf="lastname.errors.required">Last name is required</p>
+     </div>
+        </div>
+      
+        <div class="form-group" [ngClass]="{
+          'has-error': age.invalid && (age.dirty || age.touched),
+          'has-success': age.valid && (age.dirty || age.touched)
+     }">
+          <label for="">Age</label>
+          <input type="number" 
+          min="18" 
+          class="form-control" 
+          required name="age" 
+          [(ngModel)]="model.age"
+          #age="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="age.errors && (age.dirty || age.touched)">
+       <p *ngIf="age.errors.required">Email is required</p>
+       <p *ngIf="age.errors.min">Age must be greater than 18</p>
+     </div>
+        </div>
+        <div class="form-group" [ngClass]="{
+          'has-error': email.invalid && (email.dirty || email.touched),
+          'has-success': email.valid && (email.dirty || email.touched)
+     }">
+          <label for="">Email</label>
+          <input type="email" 
+          class="form-control" 
+          required 
+          name="email" 
+          [(ngModel)]="model.email"
+          pattern="[^ @]*@[^ @]*"
+          #email="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="email.errors && (email.dirty || email.touched)">
+       <p *ngIf="email.errors.required">Email is required</p>
+       <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
+     </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+      <pre>{{form.value | json}}</pre>
+    </div>
+    <user-detail (updateUserEvent)="onUpdateUserEvent($event)" 
+    (deleteUserEvent)="onDeleteUserEvent($event)"
+    *ngIf="selectedUser && hideNewUser"
+     [user]="selectedUser"></user-detail>
+  </div>
+  <div class="col-sm-3">
+    <button (click)="newUser()" type="button" class="btn btn-success btn-block" style="margin-bottom:2px;" >+New User</button>
+    <user-list (SelectUser)="onSelectUser($event)" [users]="users"></user-list>
+  </div>
+</div>

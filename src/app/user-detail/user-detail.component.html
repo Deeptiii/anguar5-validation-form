@@ -1,0 +1,23 @@
+
+<div>
+  <form>
+    <div class="form-group">
+      <input type="text" class="form-control" name="firstname" required placeholder="firstname"
+      [(ngModel)]="user.firstname">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="lastname" required placeholder="lastname"
+        [(ngModel)]="user.lastname">
+    </div>
+    <div class="form-group">
+        <input type="number" class="form-control" name="age" required placeholder="Age"
+        [(ngModel)]="user.age">
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control" name="email" required placeholder="Email"
+        [(ngModel)]="user.email">
+    </div>
+    <button type="button" (click)="updateUser()" class="btn btn-success">Update</button>
+    <button type="button" (click)="deleteUser()" class="btn btn-danger">Delete</button>
+  </form>
+</div>
