@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-9">
     <div *ngIf="!hideNewUser">
-      <h2>New User</h2>
+      <h2>New Contact</h2>
       
       <form #form="ngForm" (ngSubmit)="onSubmitAddUser(form.value)" class="well">
         
@@ -44,17 +44,18 @@
           'has-error': age.invalid && (age.dirty || age.touched),
           'has-success': age.valid && (age.dirty || age.touched)
      }">
-          <label for="">Age</label>
+          <label for="">Contact number</label>
           <input type="number" 
-          min="18" 
+          minlength="10" 
+          maxlength="10"
           class="form-control" 
           required name="age" 
           [(ngModel)]="model.age"
           #age="ngModel">
           <div class="alert alert-danger"
           *ngIf="age.errors && (age.dirty || age.touched)">
-       <p *ngIf="age.errors.required">Age is required</p>
-       <p *ngIf="age.errors.min">Age must be greater than 18</p>
+       <p *ngIf="age.errors.required">Number is required</p>
+       <p *ngIf="age.errors.minlength">Number must be 10 digits</p>
      </div>
         </div>
         <div class="form-group" [ngClass]="{
@@ -69,15 +70,15 @@
           [(ngModel)]="model.email"
           pattern="[^ @]*@[^ @]*"
           #email="ngModel">
-          <div class="alert alert-danger"
+          <!--div class="alert alert-danger"
           *ngIf="email.errors && (email.dirty || email.touched)">
        <p *ngIf="email.errors.required">Email is required</p>
        <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
-     </div>
+     </div-->
         </div>
         <button type="submit" class="btn btn-success" [disabled]="form.invalid">Save</button>
       </form>
-      <pre>{{form.value | json}}</pre>
+      <!--pre>{{form.value | json}}</pre-->
     </div>
     <user-detail (updateUserEvent)="onUpdateUserEvent($event)" 
     (deleteUserEvent)="onDeleteUserEvent($event)"
@@ -85,7 +86,7 @@
      [user]="selectedUser"></user-detail>
   </div>
   <div class="col-sm-3">
-    <button (click)="newUser()" type="button" class="btn btn-success btn-block" style="margin-bottom:2px;" >+New User</button>
+    <button (click)="newUser()" type="button" class="btn btn-success btn-block" style="margin-bottom:2px;" >+New Contact</button>
     <user-list (SelectUser)="onSelectUser($event)" [users]="users"></user-list>
   </div>
 </div>
