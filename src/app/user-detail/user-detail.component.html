@@ -40,17 +40,19 @@
         'has-error': age.invalid && (age.dirty || age.touched),
         'has-success': age.valid && (age.dirty || age.touched)
    }">
-        <label for="">Age</label>
+        <label for="">Contact number</label>
         <input type="number" 
-        min="18" 
+        minlength="10" 
+        maxlength="10"
         class="form-control" 
         required name="age" 
         [(ngModel)]="user.age"
         #age="ngModel">
         <div class="alert alert-danger"
         *ngIf="age.errors && (age.dirty || age.touched)">
-     <p *ngIf="age.errors.required">Age is required</p>
-     <p *ngIf="age.errors.min">Age must be greater than 18</p>
+     <p *ngIf="age.errors.required">Number is required</p>
+     <p *ngIf="age.errors.minlength">Number must be 10 digits</p>
+     <p *ngIf="age.errors.maxlength">Number must be 10 digits</p>
    </div>
       </div>
       <div class="form-group" [ngClass]="{
@@ -65,13 +67,14 @@
         [(ngModel)]="user.email"
         pattern="[^ @]*@[^ @]*"
         #email="ngModel">
-        <div class="alert alert-danger"
+        <!--div class="alert alert-danger"
         *ngIf="email.errors && (email.dirty || email.touched)">
-     <p *ngIf="email.errors.required">Email is required</p>
-     <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
-   </div>
+        <p *ngIf="email.errors.required">Email is required</p>
+        <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
+       </div-->
       </div>
     <button type="button" (click)="updateUser()" [disabled]="f.invalid"class="btn btn-success">Update</button>
     <button type="button" (click)="deleteUser()" class="btn btn-danger">Delete</button>
   </form>
 </div>
+<br><br><br><br><br>
